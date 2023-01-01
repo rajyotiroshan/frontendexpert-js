@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <script src="Person.js" defer></script>
+    <script src="helpers.js" defer></script>
+    <script src="modules.js" defer></script>
+    -->
+    <!-- default in strict mode-->
+    <!-- this points to undefined at top level -->
+    <script src="Person.js" type="module"></script>
+    <script src="helpers.js" type="module"></script>
+    <script src="modules.js" type="module"></script>
+
+    <!-- only imports when java does notsupport modules-->
+    <script src="nomoduleversion.js" nomodule></script>
+
     <title>Javascript module practice</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <h1>Modules</h1>
+  </body>
 </html>
