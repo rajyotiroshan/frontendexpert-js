@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>including js in html</title>
+   <!-- <script src="index.js"></script>-->
+   <!-- download script parse, do not start running until DOmcontentloading is fired
+    most recommended.
+    cleaner js and html
+    -->
+    <!--<script src="index.js" defer></script>-->
+
+    <!-- 
+        async:  load the script async when finish start executing
+        immediately download the script but continue to parse the html
+        but as soon as script downloaded, html stops and script starts executing.
+
+    -->
+    <script src="index.js" async></script>
+    <!-- it does not work since, when js executes, it does not find the button element. hence gives null. this happens since after js executes the body tag will be rendred-->
+    <!-- solution may be to add script tag at the end of body tag-->
+    
+
+</head>
+  <body>
+    <!-- nothing hapends since no js-->
+    <button id="btn">Click me</button>
+    <img id="solar" src="https://images.hindustantimes.com/tech/img/2022/09/17/1600x900/solar-system-11111_1280_1632307577786_1663416237889_1663416237889.jpg" alt="cloud sky" width="400px">
+    <!--<script src="index.js"></script><!-- it will work but semantic not good, other if html tag is long then 
+        script won't download unless html is completely rendered. -->
+        <!--but we have another newer options.-->
+    </body>
+</html>
