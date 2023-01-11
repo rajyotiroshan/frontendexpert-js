@@ -96,3 +96,178 @@ console.log(c8.isHuman);
 console.log(Object.getPrototypeOf(c8)); */
 
 //note: ny changes in prototype property will effect every object created from this prototype.
+
+// almost everything that is not primitive is an obj
+
+const funcProto = Object.getPrototypeOf(() => {});
+//console.log(Object.getOwnPropertyNames(funcProto));
+
+const arrProto = Object.getPrototypeOf([]);
+//console.log(Object.getOwnPropertyNames(arrProto));
+
+/**
+ *
+ * function constructor
+ *
+ */
+
+function Person(name) {
+  this.name = name; //insyance property
+}
+
+//every function has a prototype property on it
+Person.prototype = {
+  constructor: Person,
+  isHuman: true,
+};
+
+const corner = new Person("Corner");
+const clement = new Person("Clement");
+//console.log(corner);
+//console.log(corner.__proto__);
+//console.log(Object.getPrototypeOf(corner));
+
+//console.log(clement);
+//console.log(Object.getPrototypeOf(corner) === Object.getPrototypeOf(clement));
+
+Person.prototype.test = "test";
+
+//console.log(corner.test);
+//console.log(clement.test);
+
+const rajan = new corner.constructor("Rajan");
+const samit = new clement.constructor("Samit");
+
+//console.log(rajan);
+//console.log(samit);
+//console.log(Object.getPrototypeOf(samit) === Object.getPrototypeOf(rajan));
+
+//
+//adding method to prototype
+Person.prototype.speak = function () {
+  //console.log("Hello this is " + this.name);
+  //console.log(this.isHuman);
+};
+
+rajan.speak();
+samit.speak();
+
+//is somewhere in the corner protottype chain
+//is Person.prortype object
+/* console.log(corner instanceof Person);
+console.log(rajan instanceof Person);
+
+//all object eventutally inherots of Object
+console.log(rajan instanceof Object);
+
+console.log(rajan instanceof Array);
+
+Object.setPrototypeOf(rajan, Array.prototype);
+console.log(rajan instanceof Array);
+
+console.log(rajan); */
+
+//usecase of setting prototype
+//have array but using super old browser, not having access to push method
+
+//define it
+
+//polyfills
+
+if (Array.prototype.myPush === undefined) {
+  //console.log("called");
+  Array.prototype.myPush = function (value) {
+    this[this.length] = value;
+  };
+}
+
+const arr = [1, 2, 3];
+arr.myPush(4);
+//console.log(arr);
+
+//Modern Class function
+
+class Animal {
+  static isAnimal = true;
+  isHuman = true; //instance propertyu
+  #price = 5000;
+  constructor(name) {
+    this.name = name;
+  }
+  static greet() {
+    console.log("Hello");
+  }
+  speak() {
+    console.log(`${this.name} speaks.`);
+  }
+
+  getPrice(){
+    console.log("Animal get price");
+    return this.#price;
+  }
+
+
+  /*   get name(){
+    console.log("get name");
+    return this.name;
+  }
+
+  set name(name){
+    console.log("set name");
+    this.name = name;
+  } */
+}
+
+/* const cat = new Animal("cat");
+cat.isHuman = false;
+console.log(cat);
+console.log(cat.speak());
+console.log(cat.isHuman);
+
+const dog = new Animal("Freddy");
+console.log(dog)
+console.log(dog.speak(), dog.isHuman);
+
+cat.name = "catty";
+dog.name = "flop";
+console.log(cat.name, dog.name)
+
+console.log(Object.getPrototypeOf(dog).constructor.isAnimal);
+console.log(Animal.greet()); */
+//console.log(dog.greet()); //error
+
+//inheritance
+
+class Goat extends Animal {
+  #age; //only accessible inside the class.
+  loc;
+  constructor(name, age, loc){
+    super(name); //constructor of super class called
+    this.#age = age;
+    this.loc = loc;
+  }
+
+  getGoatPrice(){
+    console.log("goat get price");
+    return super.getPrice();
+  }
+}
+
+const g1 = new Goat("bakri", 5, 'ind');
+
+g1.speak();
+
+console.log(g1 instanceof Animal);
+console.log(g1 instanceof Goat);
+
+console.log(Goat instanceof Function);
+
+//console.log(g1.#age); //error not accessible outside class
+console.log(g1.loc);
+//console.log(g1.#price);//not accessible by child class obj
+console.log(g1)
+console.log(g1.getPrice());
+console.log(g1.getGoatPrice());
+
+
+
