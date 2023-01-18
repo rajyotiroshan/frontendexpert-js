@@ -118,3 +118,32 @@ console.log(tim); */
 /**
  * Generics
  */
+
+const arr: Array<number> = [1,2,3,4]; //Error [1,2,3,'4'];
+
+interface GetterSetter<Key, Value> {
+    set: (key : Key, value: Value) => void;
+    get: (key: Key) => Value;
+}
+
+
+class StringNumGetterSetter implements GetterSetter<string, number> {
+    map: Map<string, number> = new Map();
+
+    set(key: string, value: number):void {
+        this.map.set(key, value);
+    }
+
+    get(key: string): number{
+        return this.map.get(key);
+    }
+}
+
+
+
+
+
+
+
+
+
