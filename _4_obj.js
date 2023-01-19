@@ -184,7 +184,7 @@ const obj7 = {
 //console.log(Object.values(obj7));
 
 //Object.entries(obj7)
-//console.log(Object.entries(obj7));// @r an arr
+//console.log(Object.entries(obj7));// @r an arr[k,v]
 
 //Object.entries(obj7).forEach(function([key, value]) {
   //console.log(key, value);
